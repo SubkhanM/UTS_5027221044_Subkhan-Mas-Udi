@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package inventoryPackage;
+
+service InventoryService {
+  rpc AddItem (Item) returns (Response) {}; // CREATE
+  rpc GetAllItems (Empty) returns (Items) {}; // READ
+  rpc UpdateItem (ItemWithID) returns (Response) {}; // UPDATE
+  rpc DeleteItem (ItemID) returns (Response) {}; // DELETE
+}
+
+message Item {
+  string name = 1;
+  string description = 2;
+  float price = 3;
+  int32 quantity = 4;
+}
+
+message ItemID {
+  string id = 1;
+}
+
+message Items {
+  repeated Item items = 1;
+}
+
+message ItemWithID {
+  ItemID itemId = 1;
+  Item item = 2; 
+}
+
+message Response {
+  string message = 1;
+  int32 code = 2;
+  string itemId = 3;
+  Item item = 4;
+}
+
+message Empty {}
